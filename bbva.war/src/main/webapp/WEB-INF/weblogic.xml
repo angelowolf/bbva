@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://xmlns.oracle.com/weblogic/weblogic-web-app" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd http://xmlns.oracle.com/weblogic/weblogic-web-app http://xmlns.oracle.com/weblogic/weblogic-web-app/1.0/weblogic-web-app.xsd">
+  <weblogic-version>10.3.6</weblogic-version>
+  <context-root>bbva.war</context-root>
+  <security-role-assignment>
+    <role-name>AUTHENTICATED_USER</role-name>
+    <principal-name>AUTHENTICATED_USER</principal-name>
+  </security-role-assignment>
+  <container-descriptor>
+    <prefer-web-inf-classes>true</prefer-web-inf-classes>
+    <show-archived-real-path-enabled>true</show-archived-real-path-enabled>
+  </container-descriptor>
+  <session-descriptor>
+    <sharing-enabled>true</sharing-enabled>
+  </session-descriptor>
+  <fast-swap>
+    <enabled>false</enabled>
+  </fast-swap>
+</weblogic-web-app>

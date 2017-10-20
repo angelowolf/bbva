@@ -1,0 +1,78 @@
+######################
+# Project Specific
+######################
+**/webapp/dist/**
+
+######################
+# Node
+######################
+**/node_modules/**
+**/node_modules
+
+######################
+# Intellij
+######################
+.idea/**
+*.iml
+*.iws
+*.ipr
+*.ids
+*.orig
+######################
+# Eclipse
+######################
+*.project
+**/.settings/**
+**/.settings
+*.classpath
+
+######################
+# Windows
+######################
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+######################
+# Mac OSX
+######################
+.DS_Store
+.svn
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+######################
+# Directories
+######################
+/deploy/**
+**/bower_components/**
+**/bower_components
+**/.tmp/**
+**/.tmp
+**/.tmp/styles
+
+######################
+# Logs
+######################
+*.log
+
+######################
+# Others
+######################
+*.class
+*.*~
+*~
+.merge_file*
+**/target/**
+**/target
+
+ledzite\.war/nb-configuration\.xml
+
+ledzite\.ear/nb-configuration\.xml

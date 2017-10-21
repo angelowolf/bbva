@@ -1,11 +1,13 @@
 /**
  * 
  */
-package ar.com.claro.bbva;
+package ar.com.aw.bbva;
 
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
 import org.junit.Assert;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,11 @@ public class ArchivosTest {
 	private ArchivoDefinition biz;
 	@Autowired
 	private FondoDefinition bizF;
+	
+	@BeforeClass
+	public static void init(){
+//		  BasicConfigurator.configure();
+	}
 
 	@Test
 	public void selectArchivoTest() {

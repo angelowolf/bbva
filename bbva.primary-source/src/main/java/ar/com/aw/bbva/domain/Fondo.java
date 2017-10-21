@@ -13,11 +13,12 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FONDO")
-public class Fondo {
+public class Fondo implements Comparable {
 	private Long id;
 	private String especie;
 	private Double cantidadDisponible;
@@ -31,6 +32,7 @@ public class Fondo {
 	@GenericGenerator(name = "sequence", strategy = "sequence",
 			parameters = { @org.hibernate.annotations.Parameter(name = "sequence", value = "SEQ_BBVA_FON_ID") })
 	@Column(name = "FONDO_ID", unique = true, nullable = false, precision = 10, scale = 0)
+	@ForeignKey(name="FK_ARCHIVO_ID")
 	public Long getId() {
 		return id;
 	}
@@ -100,5 +102,14 @@ public class Fondo {
 	public String toString() {
 		return "Fondo{" + "id=" + id + ", especie=" + especie + ", cantidadDisponible=" + cantidadDisponible
 				+ ", precioMercado=" + precioMercado + ", fecha=" + fecha + '}';
+	}
+	
+	@Override
+	public int compareTo(Object f) {
+
+		Date fechaDatosF = ((Fondo) f).getFechaDatos();
+
+		return this.getFechaDatos().compareTo(fechaDatosF);
+
 	}
 }

@@ -59,7 +59,8 @@ public class ArchivoBiz implements ArchivoDefinition {
 						String[] nombreArchivo = listOfFile.getName().split("_");
 						String fechaDatos = nombreArchivo[3];
 						Date dateFechaDatos = sdf.parse(fechaDatos);
-						for (int i = 3; i < datatypeSheet.getLastRowNum() - 2; i++) {
+						for (int i = 3; i < datatypeSheet.getLastRowNum() - 1; i++) {
+							System.out.println(datatypeSheet.getLastRowNum());
 							Row row = datatypeSheet.getRow(i);
 							Cell especie = row.getCell(0);
 							Cell cntDisponible = row.getCell(2);

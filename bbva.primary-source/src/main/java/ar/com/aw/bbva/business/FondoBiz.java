@@ -1,11 +1,13 @@
 package ar.com.aw.bbva.business;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,8 +54,8 @@ public class FondoBiz implements FondoDefinition{
     public DatosDTO getDatos(){
     	DatosDTO datos = new DatosDTO ();
     	List<Fondo> fondos = this.getAll(new Fondo(),(String[]) null);
-    	HashMap<Date, Date> labels = new HashMap<>();
-    	HashMap<String, List<Fondo>> fondosByFondo = new HashMap<>();
+    	Map<Date, Date> labels = new TreeMap<>();
+    	Map<String, List<Fondo>> fondosByFondo = new TreeMap<>();
     	
     	for (Fondo f : fondos) {
 			labels.put(f.getFechaDatos(), f.getFechaDatos());
@@ -67,6 +69,7 @@ public class FondoBiz implements FondoDefinition{
 			}
 		}
     	
+    	
     	List<DataSetDTO> datasets = new ArrayList<>();
     	List<String> labelsFechas = new ArrayList<>();
     	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -74,9 +77,18 @@ public class FondoBiz implements FondoDefinition{
     		labelsFechas.add(sdf.format(fecha));
 		}
     	
+    	int cantidadMaximaDatos = 0;
+    	for (Map.Entry<String, List<Fondo>> entry : fondosByFondo.entrySet()) {
+    	    List<Fondo> value = entry.getValue();
+    	    if (cantidadMaximaDatos < value.size()) {
+    	    	cantidadMaximaDatos = value.size();
+    	    } 
+    	}    
+    	
     	for (Map.Entry<String, List<Fondo>> entry : fondosByFondo.entrySet()) {
     	    String key = entry.getKey();
     	    List<Fondo> value = entry.getValue();
+    	    Collections.sort(value);
     	    DataSetDTO ds = new DataSetDTO();
     	    ds.setLabel(key);
     	    Random rand = new Random();
@@ -84,6 +96,11 @@ public class FondoBiz implements FondoDefinition{
             String asd = String.format("#%06X", newColor);
     	    ds.setBackgroundColor(asd);
     	    List<Double> valores = new ArrayList<>();
+    	    if(value.size() < cantidadMaximaDatos) {
+    	    	for (int i = 0; i < cantidadMaximaDatos - value.size(); i++) {
+					valores.add(null);
+				}
+    	    }
     	    for (Fondo fondo : value) {
     	    	valores.add(fondo.getCantidadDisponible() * fondo.getPrecioMercado());
 			}
@@ -98,8 +115,8 @@ public class FondoBiz implements FondoDefinition{
     public DatosDTO getVariacionMercado(){
     	DatosDTO datos = new DatosDTO ();
     	List<Fondo> fondos = this.getAll(new Fondo(),(String[]) null);
-    	HashMap<Date, Date> labels = new HashMap<>();
-    	HashMap<String, List<Fondo>> fondosByFondo = new HashMap<>();
+    	Map<Date, Date> labels = new TreeMap<>();
+    	Map<String, List<Fondo>> fondosByFondo = new TreeMap<>();
     	
     	for (Fondo f : fondos) {
 			labels.put(f.getFechaDatos(), f.getFechaDatos());
@@ -120,9 +137,18 @@ public class FondoBiz implements FondoDefinition{
     		labelsFechas.add(sdf.format(fecha));
 		}
     	
+    	int cantidadMaximaDatos = 0;
+    	for (Map.Entry<String, List<Fondo>> entry : fondosByFondo.entrySet()) {
+    	    List<Fondo> value = entry.getValue();
+    	    if (cantidadMaximaDatos < value.size()) {
+    	    	cantidadMaximaDatos = value.size();
+    	    } 
+    	}   
+    	
     	for (Map.Entry<String, List<Fondo>> entry : fondosByFondo.entrySet()) {
     	    String key = entry.getKey();
     	    List<Fondo> value = entry.getValue();
+    	    Collections.sort(value);
     	    DataSetDTO ds = new DataSetDTO();
     	    ds.setLabel(key);
     	    Random rand = new Random();
@@ -130,6 +156,11 @@ public class FondoBiz implements FondoDefinition{
             String asd = String.format("#%06X", newColor);
     	    ds.setBackgroundColor(asd);
     	    List<Double> valores = new ArrayList<>();
+    	    if(value.size() < cantidadMaximaDatos) {
+    	    	for (int i = 0; i < cantidadMaximaDatos - value.size(); i++) {
+					valores.add(null);
+				}
+    	    }
     	    for (Fondo fondo : value) {
     	    	valores.add(fondo.getPrecioMercado());
 			}
@@ -144,8 +175,8 @@ public class FondoBiz implements FondoDefinition{
     public DatosDTO getDisponible(){
     	DatosDTO datos = new DatosDTO ();
     	List<Fondo> fondos = this.getAll(new Fondo(),(String[]) null);
-    	HashMap<Date, Date> labels = new HashMap<>();
-    	HashMap<String, List<Fondo>> fondosByFondo = new HashMap<>();
+    	Map<Date, Date> labels = new TreeMap<>();
+    	Map<String, List<Fondo>> fondosByFondo = new TreeMap<>();
     	
     	for (Fondo f : fondos) {
 			labels.put(f.getFechaDatos(), f.getFechaDatos());
@@ -166,9 +197,18 @@ public class FondoBiz implements FondoDefinition{
     		labelsFechas.add(sdf.format(fecha));
 		}
     	
+    	int cantidadMaximaDatos = 0;
+    	for (Map.Entry<String, List<Fondo>> entry : fondosByFondo.entrySet()) {
+    	    List<Fondo> value = entry.getValue();
+    	    if (cantidadMaximaDatos < value.size()) {
+    	    	cantidadMaximaDatos = value.size();
+    	    } 
+    	}   
+    	
     	for (Map.Entry<String, List<Fondo>> entry : fondosByFondo.entrySet()) {
     	    String key = entry.getKey();
     	    List<Fondo> value = entry.getValue();
+    	    Collections.sort(value);
     	    DataSetDTO ds = new DataSetDTO();
     	    ds.setLabel(key);
     	    Random rand = new Random();
@@ -176,6 +216,11 @@ public class FondoBiz implements FondoDefinition{
             String asd = String.format("#%06X", newColor);
     	    ds.setBackgroundColor(asd);
     	    List<Double> valores = new ArrayList<>();
+    	    if(value.size() < cantidadMaximaDatos) {
+    	    	for (int i = 0; i < cantidadMaximaDatos - value.size(); i++) {
+					valores.add(null);
+				}
+    	    }
     	    for (Fondo fondo : value) {
     	    	valores.add(fondo.getCantidadDisponible());
 			}

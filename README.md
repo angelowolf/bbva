@@ -1,0 +1,1 @@
+docker run -t -p 49160:22 -p 49161:1521 bbva/oracle-bd:desa
